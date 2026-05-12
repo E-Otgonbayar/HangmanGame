@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hangman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div id="hm-root">
+  <div class="hm-header">
+    <div class="hm-title">Hangman</div>
+    <div class="hm-subtitle">A game of words &amp; fate</div>
+  </div>
+
+  <div class="hm-main">
+    <!-- Gallows SVG -->
+    <div class="hm-gallows-wrap">
+      <svg id="hm-svg" width="180" height="200" viewBox="0 0 180 200" aria-label="Hangman gallows">
+        <line x1="20"  y1="195" x2="160" y2="195" stroke="#4a4035" stroke-width="2"   stroke-linecap="round"/>
+        <line x1="50"  y1="195" x2="50"  y2="20"  stroke="#4a4035" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="49"  y1="20"  x2="130" y2="20"  stroke="#4a4035" stroke-width="2"   stroke-linecap="round"/>
+        <line x1="130" y1="20"  x2="130" y2="50"  stroke="#4a4035" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Figure (revealed part by part) -->
+        <g id="hm-figure" class="sway" style="display:none">
+          <circle id="hm-head"  cx="130" cy="65"  r="14"                  fill="none" stroke="#c8a96e" stroke-width="2" style="display:none"/>
+          <line   id="hm-body"  x1="130" y1="79"  x2="130" y2="125"       fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" style="display:none"/>
+          <line   id="hm-arm-l" x1="130" y1="90"  x2="108" y2="110"       fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" style="display:none"/>
+          <line   id="hm-arm-r" x1="130" y1="90"  x2="152" y2="110"       fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" style="display:none"/>
+          <line   id="hm-leg-l" x1="130" y1="125" x2="110" y2="152"       fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" style="display:none"/>
+          <line   id="hm-leg-r" x1="130" y1="125" x2="150" y2="152"       fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" style="display:none"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Info panel -->
+    <div class="hm-right">
+      <div>
+        <span class="hm-category-badge" id="hm-category">—</span>
+        <div class="hm-hint" id="hm-hint"></div>
+      </div>
+      <div class="hm-word-display" id="hm-word-display"></div>
+      <div>
+        <div class="hm-lives-label">Lives</div>
+        <div class="hm-lives" id="hm-lives"></div>
+      </div>
+      <div>
+        <div class="hm-guessed-label">Wrong guesses</div>
+        <div class="hm-guessed" id="hm-guessed"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- On-screen keyboard -->
+  <div class="hm-keyboard" id="hm-keyboard"></div>
+
+  <!-- Win / Lose overlay -->
+  <div class="hm-overlay" id="hm-overlay" style="display:none">
+    <div class="hm-score-row">
+      <div class="hm-score-item">
+        <span class="hm-score-num" id="ov-wins">0</span>
+        <span class="hm-score-label">Wins</span>
+      </div>
+      <div class="hm-score-divider"></div>
+      <div class="hm-score-item">
+        <span class="hm-score-num" id="ov-losses">0</span>
+        <span class="hm-score-label">Losses</span>
+      </div>
+    </div>
+    <div class="hm-overlay-title" id="ov-title">You Win!</div>
+    <div class="hm-overlay-word">The word was <span id="ov-word"></span></div>
+    <button class="hm-play-btn" id="hm-play-btn">Play Again</button>
+  </div>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>
