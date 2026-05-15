@@ -14,11 +14,10 @@
     <div class="hm-title">Hangman</div>
     <div class="hm-subtitle">A game of words &amp; fate</div>
   </div>
-
   <div class="hm-main">
-    <!-- Gallows SVG -->
+    <!-- Gallows SVG — no fixed width/height; scales via CSS -->
     <div class="hm-gallows-wrap">
-      <svg id="hm-svg" width="180" height="200" viewBox="0 0 180 200" aria-label="Hangman gallows">
+      <svg id="hm-svg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg" aria-label="Hangman gallows">
         <line x1="20"  y1="195" x2="160" y2="195" stroke="#4a4035" stroke-width="2"   stroke-linecap="round"/>
         <line x1="50"  y1="195" x2="50"  y2="20"  stroke="#4a4035" stroke-width="2.5" stroke-linecap="round"/>
         <line x1="49"  y1="20"  x2="130" y2="20"  stroke="#4a4035" stroke-width="2"   stroke-linecap="round"/>
@@ -34,7 +33,6 @@
         </g>
       </svg>
     </div>
-
     <!-- Info panel -->
     <div class="hm-right">
       <div>
@@ -52,10 +50,8 @@
       </div>
     </div>
   </div>
-
   <!-- On-screen keyboard -->
   <div class="hm-keyboard" id="hm-keyboard"></div>
-
   <!-- Win / Lose overlay -->
   <div class="hm-overlay" id="hm-overlay" style="display:none">
     <div class="hm-score-row">
@@ -74,7 +70,6 @@
     <button class="hm-play-btn" id="hm-play-btn">Play Again</button>
   </div>
 </div>
-
 <script src="index.js"></script>
 </body>
 </html>
