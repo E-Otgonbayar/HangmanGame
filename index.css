@@ -4,26 +4,42 @@
   padding: 0;
 }
 
+:root {
+  --gold:     #c8a96e;
+  --gold-dim: #c8b89a;
+  --bg:       #0f0e0c;
+  --surface:  #1e1c18;
+  --border:   #3a3530;
+  --muted:    #6b6054;
+  --deep:     #4a4035;
+  --red:      #8b3a3a;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
   min-height: 100vh;
-  background: #0f0e0c;
+  background: var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 16px;
+  padding: clamp(12px, 3vw, 32px);
+  font-family: 'Courier Prime', monospace;
 }
 
+/* ── Root container: fills viewport, scales content ── */
 #hm-root {
-  min-height: 560px;
   width: 100%;
-  max-width: 720px;
-  background: #0f0e0c;
+  max-width: min(900px, 95vw);
+  min-height: min(90vh, 700px);
+  background: var(--bg);
   color: #e8e0d0;
-  font-family: 'Courier Prime', monospace;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px 16px 20px;
+  padding: clamp(16px, 3vw, 36px) clamp(12px, 3vw, 32px) clamp(14px, 2.5vw, 28px);
   position: relative;
   overflow: hidden;
 }
@@ -41,47 +57,56 @@ body {
 /* ── Header ── */
 .hm-header {
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: clamp(10px, 2.5vh, 24px);
   position: relative;
 }
 
 .hm-title {
   font-family: 'Playfair Display', serif;
-  font-size: 28px;
+  font-size: clamp(22px, 4vw, 38px);
   font-weight: 900;
-  color: #c8a96e;
-  letter-spacing: 4px;
+  color: var(--gold);
+  letter-spacing: clamp(2px, 0.5vw, 6px);
   text-transform: uppercase;
 }
 
 .hm-subtitle {
-  font-size: 11px;
-  color: #6b6054;
-  letter-spacing: 3px;
+  font-size: clamp(9px, 1.1vw, 12px);
+  color: var(--muted);
+  letter-spacing: clamp(1.5px, 0.4vw, 4px);
   text-transform: uppercase;
   margin-top: 2px;
 }
 
-/* ── Main layout ── */
+/* ── Main layout: side-by-side on wide, stacked on narrow ── */
 .hm-main {
   display: flex;
-  gap: 32px;
+  gap: clamp(16px, 4vw, 48px);
   align-items: flex-start;
   width: 100%;
-  max-width: 640px;
-  margin-bottom: 16px;
+  margin-bottom: clamp(10px, 2vw, 20px);
 }
 
 .hm-gallows-wrap {
   flex-shrink: 0;
+  /* SVG scales via width: 100% inside; this controls its allocated space */
+  width: clamp(120px, 25vw, 220px);
+}
+
+/* Make the SVG itself fill its container */
+#hm-svg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .hm-right {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding-top: 6px;
+  gap: clamp(8px, 1.8vh, 18px);
+  padding-top: clamp(4px, 1vw, 10px);
+  min-width: 0; /* prevent overflow */
 }
 
 /* ── Category & hint ── */
@@ -89,27 +114,27 @@ body {
   display: inline-block;
   background: rgba(200,169,110,0.12);
   border: 0.5px solid rgba(200,169,110,0.35);
-  color: #c8a96e;
-  font-size: 10px;
-  letter-spacing: 2.5px;
+  color: var(--gold);
+  font-size: clamp(9px, 1vw, 11px);
+  letter-spacing: clamp(1px, 0.3vw, 2.5px);
   text-transform: uppercase;
-  padding: 4px 10px;
+  padding: clamp(3px, 0.5vh, 5px) clamp(7px, 1vw, 12px);
   border-radius: 2px;
 }
 
 .hm-hint {
-  font-size: 11px;
-  color: #6b6054;
+  font-size: clamp(10px, 1.1vw, 12px);
+  color: var(--muted);
   font-style: italic;
   min-height: 14px;
-  margin-top: 6px;
+  margin-top: clamp(4px, 0.8vh, 8px);
 }
 
 /* ── Word display ── */
 .hm-word-display {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 10px;
+  gap: clamp(4px, 0.8vw, 8px) clamp(6px, 1.2vw, 12px);
   align-items: flex-end;
 }
 
@@ -117,17 +142,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: clamp(2px, 0.5vh, 5px);
 }
 
 .hm-letter {
   font-family: 'Playfair Display', serif;
-  font-size: 22px;
+  font-size: clamp(16px, 2.8vw, 28px);
   font-weight: 700;
   color: #e8e0d0;
-  width: 22px;
+  width: clamp(16px, 2.8vw, 28px);
   text-align: center;
-  min-height: 26px;
+  min-height: clamp(20px, 3.2vw, 32px);
   transition: all 0.25s;
 }
 
@@ -136,19 +161,19 @@ body {
 }
 
 .hm-letter-line {
-  width: 22px;
+  width: clamp(16px, 2.8vw, 28px);
   height: 1px;
-  background: #4a4035;
+  background: var(--deep);
 }
 
 .hm-space-gap {
-  width: 12px;
+  width: clamp(6px, 1.2vw, 16px);
 }
 
 /* ── Lives ── */
 .hm-lives-label {
-  font-size: 10px;
-  color: #6b6054;
+  font-size: clamp(8px, 1vw, 10px);
+  color: var(--muted);
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 4px;
@@ -156,12 +181,12 @@ body {
 
 .hm-lives {
   display: flex;
-  gap: 6px;
+  gap: clamp(4px, 0.8vw, 8px);
   align-items: center;
 }
 
 .hm-heart {
-  font-size: 14px;
+  font-size: clamp(11px, 1.4vw, 16px);
   transition: all 0.3s;
 }
 
@@ -172,8 +197,8 @@ body {
 
 /* ── Wrong guesses ── */
 .hm-guessed-label {
-  font-size: 10px;
-  color: #6b6054;
+  font-size: clamp(8px, 1vw, 10px);
+  color: var(--muted);
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 4px;
@@ -188,10 +213,10 @@ body {
 
 .hm-wrong-letter {
   font-family: 'Playfair Display', serif;
-  font-size: 14px;
-  color: #8b3a3a;
+  font-size: clamp(11px, 1.3vw, 15px);
+  color: var(--red);
   font-weight: 700;
-  padding: 1px 5px;
+  padding: 1px clamp(3px, 0.5vw, 6px);
   border: 0.5px solid rgba(139,58,58,0.35);
   border-radius: 2px;
   background: rgba(139,58,58,0.08);
@@ -200,26 +225,27 @@ body {
 /* ── Keyboard ── */
 .hm-keyboard {
   width: 100%;
-  max-width: 640px;
+  max-width: min(560px, 92vw);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: clamp(4px, 0.8vh, 7px);
 }
 
 .hm-key-row {
   display: flex;
   justify-content: center;
-  gap: 5px;
+  gap: clamp(3px, 0.6vw, 6px);
 }
 
 .hm-key {
-  width: 36px;
-  height: 36px;
-  background: #1e1c18;
-  border: 0.5px solid #3a3530;
-  color: #c8b89a;
+  /* Fluid key size: grows with viewport */
+  width:  clamp(28px, 5.5vw, 44px);
+  height: clamp(28px, 5.5vw, 44px);
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  color: var(--gold-dim);
   font-family: 'Courier Prime', monospace;
-  font-size: 13px;
+  font-size: clamp(10px, 1.4vw, 14px);
   font-weight: 700;
   cursor: pointer;
   border-radius: 3px;
@@ -230,8 +256,8 @@ body {
 
 .hm-key:hover:not(:disabled) {
   background: #2a2820;
-  border-color: #c8a96e;
-  color: #c8a96e;
+  border-color: var(--gold);
+  color: var(--gold);
   transform: translateY(-1px);
 }
 
@@ -266,43 +292,44 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: clamp(10px, 2.5vh, 20px);
   z-index: 10;
   animation: fadeIn 0.4s;
 }
 
 .hm-overlay-title {
   font-family: 'Playfair Display', serif;
-  font-size: 36px;
+  font-size: clamp(24px, 5vw, 42px);
   font-weight: 900;
-  letter-spacing: 6px;
+  letter-spacing: clamp(3px, 1vw, 8px);
   text-transform: uppercase;
 }
 
-.hm-overlay-title.win  { color: #c8a96e; }
-.hm-overlay-title.lose { color: #8b3a3a; }
+.hm-overlay-title.win  { color: var(--gold); }
+.hm-overlay-title.lose { color: var(--red);  }
 
 .hm-overlay-word {
-  font-size: 13px;
-  color: #6b6054;
+  font-size: clamp(10px, 1.3vw, 14px);
+  color: var(--muted);
   letter-spacing: 3px;
+  text-align: center;
 }
 
 .hm-overlay-word span {
-  color: #c8b89a;
+  color: var(--gold-dim);
   font-family: 'Playfair Display', serif;
-  font-size: 16px;
+  font-size: clamp(13px, 1.7vw, 18px);
 }
 
 .hm-play-btn {
   background: transparent;
-  border: 1px solid #c8a96e;
-  color: #c8a96e;
+  border: 1px solid var(--gold);
+  color: var(--gold);
   font-family: 'Courier Prime', monospace;
-  font-size: 12px;
+  font-size: clamp(10px, 1.2vw, 13px);
   letter-spacing: 3px;
   text-transform: uppercase;
-  padding: 10px 28px;
+  padding: clamp(8px, 1.5vh, 12px) clamp(20px, 3vw, 32px);
   cursor: pointer;
   border-radius: 2px;
   transition: all 0.2s;
@@ -317,7 +344,7 @@ body {
 /* ── Score row ── */
 .hm-score-row {
   display: flex;
-  gap: 20px;
+  gap: clamp(14px, 3vw, 28px);
   margin-bottom: 4px;
 }
 
@@ -327,14 +354,14 @@ body {
 
 .hm-score-num {
   font-family: 'Playfair Display', serif;
-  font-size: 24px;
+  font-size: clamp(18px, 3.5vw, 30px);
   font-weight: 700;
-  color: #c8a96e;
+  color: var(--gold);
   display: block;
 }
 
 .hm-score-label {
-  font-size: 9px;
+  font-size: clamp(8px, 1vw, 10px);
   color: #5a5248;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -346,7 +373,7 @@ body {
   align-self: stretch;
 }
 
-/* ── Gallows figure animation ── */
+/* ── Gallows figure ── */
 .sway {
   transform-origin: 130px 50px;
   animation: sway 1.8s ease-in-out infinite;
@@ -367,4 +394,32 @@ body {
 @keyframes sway {
   0%,100% { transform: rotate(-3deg); }
   50%     { transform: rotate(3deg);  }
+}
+
+/* ── Mobile: stack gallows above info ── */
+@media (max-width: 520px) {
+  .hm-main {
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(10px, 3vw, 16px);
+  }
+
+  .hm-gallows-wrap {
+    width: clamp(100px, 40vw, 160px);
+  }
+
+  .hm-right {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hm-word-display {
+    justify-content: center;
+  }
+
+  .hm-lives,
+  .hm-guessed {
+    justify-content: center;
+  }
 }
